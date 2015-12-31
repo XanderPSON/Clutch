@@ -11,9 +11,107 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20151231203803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.boolean  "is_private"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["event_id"], name: "index_comments_on_event_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "host_id"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.string   "public_location"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.integer  "max_size"
+    t.datetime "time_start"
+    t.datetime "time_end"
+    t.string   "name"
+    t.text     "description"
+    t.string   "category"
+    t.boolean  "status",            default: true
+    t.boolean  "approval_required"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "geojson_builders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "rater_id"
+    t.integer  "ratee_id"
+    t.float    "rating"
+    t.text     "rating_feedback"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "ratings", ["event_id"], name: "index_ratings_on_event_id", using: :btree
+
+  create_table "rsvps", force: :cascade do |t|
+    t.integer  "guest_id"
+    t.integer  "event_id"
+    t.boolean  "pending"
+    t.boolean  "confirmed"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "rsvps", ["event_id"], name: "index_rsvps_on_event_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.string   "avatar"
+    t.string   "phone_number"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "comments", "events"
+  add_foreign_key "comments", "users"
+  add_foreign_key "ratings", "events"
+  add_foreign_key "rsvps", "events"
 end
