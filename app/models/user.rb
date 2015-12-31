@@ -68,5 +68,4 @@ end
     return attending_events
   end
 
-
 end

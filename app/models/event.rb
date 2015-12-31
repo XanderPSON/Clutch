@@ -1,6 +1,5 @@
 class Event < ActiveRecord::Base
 
-
   belongs_to :host, class_name: "User"
   has_many :rsvps
   has_many :guests, through: :rsvps, source: :guest
@@ -37,4 +36,3 @@ def self.search(query)
 end
 
 end
-
