@@ -4,12 +4,45 @@ Rails.application.routes.draw do
   resources :ratings
   resources :comments
   resources :events
-  # resources :users
+  resources :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'home#index'
+
+  get 'home/team'
+
+
+  # Routes from previous Clutch
+
+  # get 'events/map'
+  # get 'rsvps/makebutton'
+  # get 'search', to: 'search#search'
+
+  # devise_for :users, :skip => [:sessions], :controllers => { :omniauth_callbacks => "callbacks" }
+  # as :user do
+  #   get 'signin' => 'devise/sessions#new', :as => :new_user_session
+  #   post 'signin' => 'devise/sessions#create', :as => :user_session
+  #   delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
+  # end
+
+  # resources :events do
+  #   collection do
+  #     get 'search'
+  #   end
+  # end
+
+  # resources :users do
+  #   member do
+  #     get 'feedback'
+  #     get 'reviews'
+  #     get 'hosted_events'
+  #     get 'guest_events'
+  #   end
+  # end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
