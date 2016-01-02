@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+# gem "jquery-turbolinks"
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -32,21 +34,44 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-#OmniAuth
+#Devise & OmniAuth
 gem 'therubyracer'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+#Twilio & Other User Info
+# gem 'twilio-ruby'
+# gem 'phonelib'
+# gem 'gravtastic'
 
 #Heroku
 gem 'rails_12factor', group: :production
 gem 'puma'
 ruby "2.2.1"
 
+#Stlying
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+
+#Maps
+gem 'mapbox-rails'
+gem 'geocoder'
+# gem 'leaflet-rails'
+# gem 'leaflet-markercluster-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # gem 'pry-nav'
+  # gem 'rspec-rails'
+  # gem 'chromedriver-helper'
+  # gem 'database_cleaner'
+  # gem 'shoulda-matchers'
+  # gem 'selenium-webdriver'
+  # gem "capybara"
+  # gem 'ffaker'
+  # gem 'faker'
 end
 
 group :development do
