@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  ### The two lines below were uncommented in old Clutch ###
   # include Gravtastic
   # gravtastic
   # Include default devise modules. Others available are:
@@ -27,10 +28,12 @@ class User < ActiveRecord::Base
 
   # geocoded_by :ip_address
 
+  ### Below was uncommented in old Clutch ###
+
   # geocoded_by :full_address
 
   # the callback to set longitude and latitude
-  after_validation :geocode, if: :full_address_changed?
+  # after_validation :geocode, if: :full_address_changed?
 
   # the full_address method
   def full_address

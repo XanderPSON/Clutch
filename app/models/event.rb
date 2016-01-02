@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   # geocoded_by :full_address # full_address is a method which take some model's attributes to get a formatted address for example
 
   # the callback to set longitude and latitude
-  after_validation :geocode, if: :full_address_changed?
+  # after_validation :geocode, if: :full_address_changed?
 
   # the full_address method
   def full_address
