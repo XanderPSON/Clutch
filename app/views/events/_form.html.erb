@@ -1,4 +1,6 @@
-<%= form_for(@event) do |f| %>
+<% if user_signed_in? %>
+
+<%= form_for @event, html: {id: "event-form"} do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -11,7 +13,68 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+
+  <fieldset class="form-group">
+    <%= f.label :event_name %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :category %><br>
+    <%= f.text_field :category, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :max_size %><br>
+    <%= f.number_field :max_size, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :public_location %><br>
+    <%= f.text_field :public_location, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :address_line_1, placeholder: "optional" %><br>
+    <%= f.text_field :address_line_1, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :address_line_2 %><br>
+    <%= f.text_field :address_line_2, class: "form-control", placeholder: "optional" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :city %><br>
+    <%= f.text_field :city, class: "form-control", placeholder: "required" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :state %><br>
+    <%= f.text_field :state, class: "form-control", placeholder: "required"  %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :zip %><br>
+    <%= f.text_field :zip, class: "form-control", placeholder: "required" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :time_start %><br>
+    <%= f.datetime_select :time_start, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :time_end %><br>
+    <%= f.datetime_select :time_end, class: "form-control" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.label :approval_required %><br>
+    <%= f.check_box :approval_required, class: "checkbox", class: "form-control" %>
+  </fieldset>
+  <fieldset class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </fieldset>
+<% end %>
+
+<% else %>
+
+<h1>Please login to create an event</h1>
+
 <% end %>

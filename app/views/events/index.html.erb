@@ -1,25 +1,100 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Events</h1>
+<%#= render 'searchside' %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- <div id="wrapper"> -->
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+                    <!-- <div class="col-md-12"> -->
+
+
+ <div class="jumbotron">
+        <h1>Welcome to events</h1>
+        <p class="lead">Jump in to find a new friend in town or maybe even a new interest, too...</p>
+        <button class="btn btn-lg btn-success"><%= link_to 'Add your own Event', new_event_path %></button>
+      </div>
+<a class="btn btn-info" id="menu-toggle">Filter results</a>
+
+<h1>Upcoming events </h1>
+
+<div class="row marketing">
+  <% @events.in_groups_of(2) do |event1, event2| %>
+        <div class="col-lg-6">
+
+          <h4><%= link_to "#{event1.name}", event_path(event1.id) %>
+            <% if user_signed_in? && Rsvp.find_by(event_id: event1.id, guest_id: current_user.id, pending: true)%>
+              <span class="badge">
+                <%= "Request pending" %>
+              </span>
+            <% end %>
+            <span>
+            <% if user_signed_in? && current_user.id != event1.host_id %>
+              <% if !Rsvp.find_by(event_id: event1.id, guest_id: current_user.id) && event1.approval_required == false %>
+                <p><%= button_to 'Join', {controller: "rsvps", action: "create", method: :post, rsvp: {guest_id: current_user.id, event_id: event1.id, pending: false, confirmed: true}}, class: "btn btn-primary" %></p>
+              <% elsif !Rsvp.find_by(event_id: event1.id, guest_id: current_user.id) && event1.approval_required == true %>
+                <%= button_to 'Send Request', {controller: "rsvps", action: "create", method: :post, rsvp: {guest_id: current_user.id, event_id: event1.id, pending: true, confirmed: false}}, class: "btn btn-info" %>
+              <% elsif Rsvp.find_by(event_id: event1.id, guest_id: current_user.id) && event1.approval_required == false || (event1.approval_required == true && Rsvp.find_by(event_id: event1.id, guest_id: current_user.id).confirmed == true)%>
+                <%= button_to 'Unjoin', {controller: "rsvps", action: "destroy", id: Rsvp.find_by(event_id: event1.id, guest_id: current_user.id).id}, method: :delete%>
+              <% elsif Rsvp.find_by(event_id: event1.id, guest_id: current_user.id) && event1.approval_required == true%>
+                <%= button_to 'Cancel Request', {controller: "rsvps", action: "destroy", id: Rsvp.find_by(event_id: event1.id, guest_id: current_user.id).id}, method: :delete %>
+              <% else %>
+                <span class="badge"><%= event1.max_size - event1.current_count %></span>
+              <% end %>
+          <% else %>
+            <span class="badge"><%= event1.max_size - event1.current_count %> spots left</span>
+          <% end %>
+        </span>
+        </h4>
+        <p class="blog-post-meta"><%= event1.time_start.strftime('%-l:%M %p %b %-e') %></p>
+        <p><%= event1.description %></p>
+      </div>
+      <% if event2 %>
+
+        <div class="col-lg-6">
+
+          <h4><%= link_to "#{event2.name}", event_path(event2.id) %>
+            <% if user_signed_in? && Rsvp.find_by(event_id: event2.id, guest_id: current_user.id, pending: true)%>
+        <span class="badge"><%= "Request pending" %></span>
+        <% end %>
+            <span>
+            <% if user_signed_in? && current_user.id != event2.host_id %>
+              <% if !Rsvp.find_by(event_id: event2.id, guest_id: current_user.id) && event2.approval_required == false %>
+                <%= button_to 'Join', {controller: "rsvps", action: "create", method: :post, rsvp: {guest_id: current_user.id, event_id: event2.id, pending: false, confirmed: true}}, class: "btn btn-primary" %>
+              <% elsif !Rsvp.find_by(event_id: event2.id, guest_id: current_user.id) && event2.approval_required == true %>
+                <%= button_to 'Send Request', {controller: "rsvps", action: "create", method: :post, rsvp: {guest_id: current_user.id, event_id: event2.id, pending: true, confirmed: false}}, class: "btn btn-info" %>
+              <% elsif Rsvp.find_by(event_id: event2.id, guest_id: current_user.id) && event2.approval_required == false || (event2.approval_required == true && Rsvp.find_by(event_id: event2.id, guest_id: current_user.id).confirmed == true)%>
+                <%= button_to 'Unjoin', {controller: "rsvps", action: "destroy", id: Rsvp.find_by(event_id: event2.id, guest_id: current_user.id).id}, method: :delete%>
+              <% elsif Rsvp.find_by(event_id: event2.id, guest_id: current_user.id) && event2.approval_required == true%>
+                <%= button_to 'Cancel Request', {controller: "rsvps", action: "destroy", id: Rsvp.find_by(event_id: event2.id, guest_id: current_user.id).id}, method: :delete %>
+              <% else %>
+                <span class="badge"><%= event2.max_size - event2.current_count %></span>
+              <% end %>
+          <% else %>
+            <span class="badge"><%= event2.max_size - event2.current_count %></span>
+          <% end %>
+        </span>
+        </h4>
+        <p class="blog-post-meta"><%= event2.time_start.strftime('%-l:%M %p %b %-e') %></p>
+        <p><%= event2.description %></p>
+
+      </div>
     <% end %>
-  </tbody>
-</table>
+<!--   </tbody>
+</table> -->
 
-<br>
+    <% end %>
+  </div>
 
-<%= link_to 'New Event', new_event_path %>
+
+
+</div>
+
+
+</div>
+</div>
+
+    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
