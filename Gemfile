@@ -43,7 +43,6 @@ gem 'omniauth-facebook'
 #Twilio & Other User Info
 # gem 'twilio-ruby'
 # gem 'phonelib'
-# gem 'gravtastic'
 
 #Heroku
 gem 'rails_12factor', group: :production

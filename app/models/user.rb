@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  ### The two lines below were uncommented in old Clutch ###
-  # include Gravtastic
-  # gravtastic
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

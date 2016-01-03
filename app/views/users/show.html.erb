@@ -1,4 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div id="notice"><%= notice %></div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+</br>
+
+<% if user_signed_in? && current_user.id == @user.id%>
+
+<%= render "private_profile" %>
+
+<% else %>
+
+<%= render "public_profile"%>
+
+
+<% end %>
+
+</br>
+
+
+

@@ -1,0 +1,108 @@
+<% if user_signed_in? && current_user.id == @user.id%>
+
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders ico">
+            <div class="col-xs-6 col-sm-3 placeholder">
+               <%= image_tag @user.avatar, class: "img-responsive", alt: "user profile picture" %>
+                <h4><%= @user.first_name %></h4>
+              <span class="text-muted"><%= link_to 'Edit profile', edit_user_path(@user) %></span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <%= link_to '<i class="fa fa-star-o fa-5x"></i>'.html_safe, "/users/#{@user.id}/feedback" %>
+              <h4>Ratings</h4>
+              <span class="text-muted">See all your ratings</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <%= link_to '<i class="fa fa-hand-peace-o fa-5x"></i>'.html_safe, "/users/#{@user.id}/hosted_events" %>
+              <h4>Hosted Events</h4>
+              <span class="text-muted">See all the events you're putting on</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <%= link_to '<i class="fa fa-hand-spock-o fa-5x"></i>'.html_safe, "/users/#{@user.id}/guest_events" %>
+              <h4>Upcoming Events</h4>
+              <span class="text-muted">See all the events you're attending as a guest</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">Your sent requests</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Event name</th>
+                  <th>Host</th>
+                  <th>Start time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @user.rsvps.each do |rsvp| %>
+                <% if rsvp.event.time_start.future? %>
+                <tr>
+                  <td><strong><%= link_to "#{rsvp.event.name}", event_path(rsvp.event.id) %></strong></td>
+                  <td><%= link_to "#{rsvp.event.host.first_name}", user_path(rsvp.event.host.id) %></td>
+                  <td><%= rsvp.event.time_start %></td>
+                  <% if rsvp.pending %>
+                    <td><span class="label label-warning">Pending</span></td>
+                  <% elsif rsvp.confirmed %>
+                    <td><span class="label label-success">Confirmed!</span></td>
+                  <% else rsvp.confirmed == false %>
+                    <td><span class="label label-danger">Declined</span></td>
+                  <% end %>
+                </tr>
+                <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+        <h2 class="sub-header">Your hosted event requests:</h2>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Event name</th>
+                  <th>Guest name</th>
+                  <th>Guest</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @user.events.each do |event| %>
+                  <% if event.time_start.future? %>
+                  <tr>
+                    <td class="info" colspan="3">
+                      <strong><%= link_to "#{event.name}", event_path(event.id) %></strong>
+                      <% if event.rsvps.where(confirmed: true).length >= event.max_size %>
+                        <span class="label label-danger">Full!</span>
+                      <% end %>
+                    </td>
+                  </tr>
+
+                  <% event.rsvps.each do |rsvp| %>
+                  <tr>
+                    <td></td>
+                    <td><%= link_to "#{rsvp.guest.first_name}", user_path(rsvp.guest.id) %></td>
+                      <% if rsvp.pending %>
+                        <td><span class="label label-warning"><%= link_to 'Respond', edit_rsvp_path(rsvp.id) %></span></td>
+                      <% elsif rsvp.confirmed %>
+                        <td><span class="label label-success">Confirmed!</span></td>
+                      <% else rsvp.confirmed == false %>
+                        <td><span class="label label-danger">Declined</span></td>
+                      <% end %>
+                  </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% else %>
+    You've reached this page in error! Please log in to view your own profile or click the profile picture at the top of the page.
+    <% end %>
