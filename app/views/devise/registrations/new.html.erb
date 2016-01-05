@@ -5,7 +5,7 @@
 
   <div class="form-group">
     <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: 'form-control' %>
+    <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -43,17 +43,22 @@
     <%= f.email_field :zip, class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :avatar %>h
+<!--   <div class="form-group">
+    <%= f.label :avatar %>
     <%= f.email_field :avatar, class: 'form-control' %>
-  </div>      
+  </div> -->
+
+  <div class="form-group">
+    <%= f.label :phone_number %>
+    <%= f.email_field :phone_number, class: 'form-control' %>
+  </div>         
 
   <div class="form-group">
     <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-    <% if @validatable %>
-      <span class="help-block"><%= @minimum_password_length %> characters minimum</span>
-    <% end %>
   </div>
 
   <div class="form-group">
@@ -61,7 +66,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
 
-  <%= f.submit "Sign up", class: 'btn btn-primary' %>
+  <div class="actions">
+    <%= f.submit "Sign up", class: 'btn btn-primary' %>
+  </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
