@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
   end
 
 def self.search(query)
-    where("category LIKE ? OR name LIKE ? OR description LIKE ? AND status = ? ", "%#{query}%", "%#{query}%", "%#{query}%", true)
+    where("category ILIKE ? OR name ILIKE ? OR description ILIKE ? AND status = ? ", "%#{query}%", "%#{query}%", "%#{query}%", true)
 end
 
 end

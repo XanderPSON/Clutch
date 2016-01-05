@@ -7,13 +7,6 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
@@ -46,7 +39,7 @@
           <%= text_field_tag :q, params[:q], placeholder: "Search Events", class: "form-control" %>
         </li>
         <li class="nav-input">
-          <%= submit_tag "Search", :class => 'btn btn-default',:name => nil%>
+          <%= submit_tag "Search", :class => 'btn btn-default', name: nil%>
         </li>
       <li class="nav-input create-event"><%= button_to "Create event", new_event_path, class: "btn btn-primary" %>
       </li>

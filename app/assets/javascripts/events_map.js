@@ -1,6 +1,4 @@
-// $(document).ready(function(){
-$(document).on('page:change', function(){
-  console.log('Hit!')
+$(document).on('page:change', function(){   // $(document).ready(function(){
   L.mapbox.accessToken = 'pk.eyJ1IjoieGFuZGVycHNvbiIsImEiOiJjaWZvcml2YjU1Mnc2c3ZrcTlibmxjcXJuIn0.M7QobcyaQENSoLb86fvvug';
   var map = L.mapbox.map('map', 'xanderpson.o0la4oio', {zoomControl: false}).setView([37.761688, -122.481385], 13),
       filters = document.getElementById('filters');

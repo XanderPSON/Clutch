@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     #   e.close_event
     # end
     if params[:q]
-      @events = Event.search(params[:q])
+      @events = Event.search(params[:q]).order("created_at DESC")
     else
       @events = Event.all
     end
@@ -29,14 +29,6 @@ class EventsController < ApplicationController
         format.html
         format.json
       end
-    end
-  end
-
-  def search
-    if params[:search].present?
-      @events = Event.search(params[:search])
-    else
-      @events = Events.all
     end
   end
 
