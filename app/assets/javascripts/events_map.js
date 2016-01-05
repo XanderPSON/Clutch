@@ -1,4 +1,6 @@
-$(document).ready(function(){
+// $(document).ready(function(){
+$(document).on('page:change', function(){
+  console.log('Hit!')
   L.mapbox.accessToken = 'pk.eyJ1IjoieGFuZGVycHNvbiIsImEiOiJjaWZvcml2YjU1Mnc2c3ZrcTlibmxjcXJuIn0.M7QobcyaQENSoLb86fvvug';
   var map = L.mapbox.map('map', 'xanderpson.o0la4oio', {zoomControl: false}).setView([37.761688, -122.481385], 13),
       filters = document.getElementById('filters');
@@ -34,7 +36,23 @@ $(document).ready(function(){
     .fail(function(events){
       alert("Could not search");
     })
-  }); //search-form ajax
+  }); //search form ajax
+
+    $('body').on('click', '.create-event', function(e){
+    e.preventDefault();
+    var path = $(this).attr('href');
+    $.ajax({
+        url: '/events/new',
+        type: 'GET',
+        dataType: 'html'
+      })
+      .done(function(response){
+          $('#info').html(response);
+      })
+      .fail(function(response){
+        console.log('fail')
+      })    
+  }) //create event ajax
 
   $('body').on('submit', '#event-form', function(e){
   e.preventDefault();
