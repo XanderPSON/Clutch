@@ -2,37 +2,60 @@
 <html>
 <head>
   <title>Clutch</title>
+  <% favicon_link_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+
+  <style type="text/css">
+    .wat {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
 
-<p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+<!-- START HEADER -->
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Clutch</a>
+  </div>
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <%= form_tag("/events/", :method => "get", id: "search-form", html: {class: 'form-group'}) do |f|%>
+        <li class="nav-input">
+          <%= text_field_tag :q, params[:q], placeholder: "Search Events", class: "form-control" %>
+        </li>
+        <li class="nav-input">
+          <%= submit_tag "Search", :class => 'btn btn-default',:name => nil%>
+        </li>
+      <li class="nav-input create-event"><%= button_to "Create event", new_event_path, class: "btn btn-primary" %>
+      </li>
 
-<%= yield %>
+      <% end %>
+    </ul>
+    <%= render 'layouts/user_header' %>
+  </div>
+</nav>
+<!-- END HEADER -->
 
-<ul class="nav">
-  <li class="active"><a href="/users">Users</a></li>
-  <li class="active"><a href="/events">Events</a></li>
-  <li class="active"><a href="/rsvps">Rsvps</a></li>
-  <li class="active"><a href="/comments">Comments</a></li>
-  <li class="active"><a href="/ratings">Ratings</a></li>
-</ul>
+
+  <div class="container">
+    <%= yield %>
+  </div>
 
 </body>
 </html>
