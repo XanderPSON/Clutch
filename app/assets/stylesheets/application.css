@@ -41,19 +41,41 @@
   margin-bottom: 15px;
   padding: 7px 9px;
 }
+
 .navbar {
-background-color: black;
-opacity: 0.8;
+  background-color: black !important;
+  opacity: 0.8;
+}
+
+
+.user-profile {
+  color: white !important;
+}
+
+.logout {
+  color: white !important;
+}
+
+.login {
+  color: white !important;
+}
+
+.sign-up {
+  color: white !important;
+}
+
+.meet-team {
+  color: white !important;
 }
 
 .comments_body{
-  color:black;
+  color: black;
   padding: 15px;
   font-size: 18px;
 }
 
 .footer-panel {
-  color:black;
+  color: black;
 }
 
 .attendees {
@@ -72,8 +94,8 @@ opacity: 0.8;
 }
 
 .rating_number {
-postion:relative;
-margin-top: -10px;
+  position: relative;
+  margin-top: -10px;
 }
 
 .host-attendees{
@@ -94,7 +116,7 @@ div.navbar-header {
 }
 .navbar-brand {
   font-weight: bolder;
-  font-size: 1.75em;
+  font-size: 1.75em !important;
   text-transform: lowercase;
 }
 
