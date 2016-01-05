@@ -1,4 +1,29 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Event:</strong>
+  <%= @rating.event_id %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @rating.rating %>
+</p>
+
+<p>
+  <strong>Rating feedback:</strong>
+  <%= @rating.rating_feedback %>
+</p>
+
+<p>
+  <strong>Rater:</strong>
+  <%= User.find(@rating.rater_id).first_name + " " + User.find(@rating.rater_id).last_name %>
+</p>
+
+<p>
+  <strong>Ratee:</strong>
+  <%= User.find(@rating.ratee_id).first_name + " " + User.find(@rating.rater_id).last_name %>
+</p>
+
 <%= link_to 'Edit', edit_rating_path(@rating) %> |
 <%= link_to 'Back', ratings_path %>

@@ -1,26 +1,34 @@
 Rails.application.routes.draw do
+  get 'home/team'
+  get 'home/map'
+  get 'events/map'
+  
   devise_for :users
-  resources :users
+  
+  resources :users do
+    member do
+      get 'feedback'
+      get 'hosted_events'
+      get 'guest_events'
+    end
+  end
+
   resources :events
   resources :rsvps
   resources :comments
   resources :ratings
-  get 'home/team'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
-
-
+  root 'home#map'
 
   # Routes from previous Clutch
 
-  # get 'events/map'
   # get 'rsvps/makebutton'
   # get 'search', to: 'search#search'
-
+  
   # devise_for :users, :skip => [:sessions], :controllers => { :omniauth_callbacks => "callbacks" }
   # as :user do
   #   get 'signin' => 'devise/sessions#new', :as => :new_user_session
@@ -33,16 +41,6 @@ Rails.application.routes.draw do
   #     get 'search'
   #   end
   # end
-
-  # resources :users do
-  #   member do
-  #     get 'feedback'
-  #     get 'reviews'
-  #     get 'hosted_events'
-  #     get 'guest_events'
-  #   end
-  # end
-
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
