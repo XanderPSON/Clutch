@@ -9,7 +9,7 @@ class GeojsonBuilder < ActiveRecord::Base
       },
       properties: {
         id: event.id,
-        host: User.find(event.host_id).username,
+        host: User.find(event.host_id).first_name + " " + User.find(event.host_id).last_name,
         name: event.name,
         description:event.description,
         public_location: event.public_location,
