@@ -10,7 +10,7 @@
 
 
 
-/*html {
+html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
@@ -192,7 +192,7 @@ table {
 td,
 th {
   padding: 0;
-}*/
+}
 
 
 
@@ -213,7 +213,7 @@ th {
 
 
 
-/*@media print {
+@media print {
   *,
   *:before,
   *:after {
@@ -6604,5 +6604,5 @@ button.close {
   .hidden-print {
     display: none !important;
   }
-}*/
+}
 /*# sourceMappingURL=bootstrap.css.map */
