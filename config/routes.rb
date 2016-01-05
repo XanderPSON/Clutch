@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'home/team'
-  get 'home/map'
   get 'events/map'
   
   devise_for :users
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#map'
+  root 'events#map'
 
   # Routes from previous Clutch
 
