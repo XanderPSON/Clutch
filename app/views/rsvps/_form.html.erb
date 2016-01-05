@@ -11,6 +11,22 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :guest_id %><br>
+    <%= f.text_field :guest_id %>
+  </div>
+  <div class="field">
+    <%= f.label :event_id %><br>
+    <%= f.text_field :event_id %>
+  </div>
+  <div class="field">
+    <%= f.label :pending %><br>
+    <%= f.check_box :pending %>
+  </div>
+  <div class="field">
+    <%= f.label :confirmed %><br>
+    <%= f.check_box :confirmed %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
