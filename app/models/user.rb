@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   has_many :given_ratings, class_name: "Rating", foreign_key: "rater_id"
   has_many :received_ratings, class_name: "Rating", foreign_key: "ratee_id"
 
-
   # validates_uniqueness_of :phone_number
   # validates :phone_number, phone: { possible: false, allow_blank: true, types: [:mobile] }
 
@@ -26,12 +25,10 @@ class User < ActiveRecord::Base
 
   # geocoded_by :ip_address
 
-  ### Below was uncommented in old Clutch ###
-
-  # geocoded_by :full_address
+  geocoded_by :full_address
 
   # the callback to set longitude and latitude
-  # after_validation :geocode, if: :full_address_changed?
+  after_validation :geocode, if: :full_address_changed?
 
   # the full_address method
   def full_address
