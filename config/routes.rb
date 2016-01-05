@@ -1,13 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
+  
+  resources :users do
+    member do
+      get 'feedback'
+      get 'hosted_events'
+      get 'guest_events'
+    end
+  end
+
   resources :events
   resources :rsvps
   resources :comments
   resources :ratings
+  
   get 'home/team'
   get 'home/map'
   get 'events/map'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -36,14 +46,7 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  # resources :users do
-  #   member do
-  #     get 'feedback'
-  #     get 'reviews'
-  #     get 'hosted_events'
-  #     get 'guest_events'
-  #   end
-  # end
+
 
 
   # Example of regular route:

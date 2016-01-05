@@ -1,0 +1,35 @@
+<% if user_signed_in? && current_user.id == @user.id%>
+
+  <h1>Events you're attending</h1>
+  <% @user.confirmed_events(@user.id).each do |event| %>
+        <% if event.time_start.future? %>
+          <h2><%= link_to "#{event.name}", event_path(event.id) %>
+          <% if event.rsvps.where(confirmed: true).length >= event.max_size %>
+              <span class="label label-danger">Full!</span>
+          <% end %>
+          </h2>
+          <p class="blog-post-meta"><%= event.time_start.strftime("%H:%M %d %b. %Y") %></p>
+
+        <p><%= event.description %></p>
+        <% end %>
+  <% end %>
+
+  <h1>Events you've attended</h1>
+
+  <% @user.events.each do |event| %>
+      <% if event.time_start.past? %>
+        <h2><%= link_to "#{event.name}", event_path(event.id) %></h2>
+        <p class="blog-post-meta"><%= event.time_start.strftime("%H:%M %d %b. %Y") %></p>
+          <% if event.rsvps.where(confirmed: true).length >= event.max_size %>
+            <span class="label label-danger">Full!</span>
+          <% end %>
+        <p><%= event.description %></p>
+      <% end %>
+  <% end %>
+  <!-- </div> -->
+
+<% else %>
+
+  <p>Please log in to see your upcoming events</p>
+
+<% end %>
