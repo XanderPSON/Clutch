@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :ratings
   get 'home/team'
   get 'home/map'
+  get 'events/map'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
