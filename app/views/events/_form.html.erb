@@ -15,9 +15,6 @@
     </div>
   <% end %>
 
-
-
-
   <fieldset class="form-group">
     <%= f.label :event_name %><br>
     <%= f.text_field :name, class: "form-control" %>
@@ -68,7 +65,7 @@
   </fieldset>
   <fieldset class="form-group">
     <%= f.label :approval_required %><br>
-    <%= f.check_box :approval_required, class: "checkbox", class: "form-control" %>
+    <%= f.check_box :approval_required, class: "approval-required-checkbox" %>
   </fieldset>
   <fieldset class="actions">
     <%= f.submit class: "btn btn-primary" %>

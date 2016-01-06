@@ -153,3 +153,10 @@ div.main {
 .comments-section {
   width: 80%;
 }
+
+.approval-required-checkbox {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
