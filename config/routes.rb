@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'home/team'
   get 'events/map'
   
-  devise_for :users
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   
   resources :users do
     member do
