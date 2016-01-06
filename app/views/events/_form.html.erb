@@ -1,5 +1,7 @@
 <% if user_signed_in? %>
 
+<h1>New Event</h1>
+
 <%= form_for @event, html: {id: "event-form"} do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">

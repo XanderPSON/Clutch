@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          # , :omniauth_providers => [:facebook]
@@ -37,6 +35,11 @@ class User < ActiveRecord::Base
 
   def full_address_changed?
     :address_line_1_changed? || :address_line_2_changed? || :city_changed? || :state_changed? || :zip_changed?
+  end
+
+  # get full name
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
 # ***** Original Facebook Login Auth ******
