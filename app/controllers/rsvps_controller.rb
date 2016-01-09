@@ -32,7 +32,7 @@ class RsvpsController < ApplicationController
         format.html { render :makebutton, layout: false }
           format.json { render :show, status: :created, location: @rsvp }
         end
-        format.html { redirect_to events_path, notice: 'Rsvp was successfully created.' }
+        format.html { redirect_to events_path }
         format.json { render :show, status: :created, location: @rsvp }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class RsvpsController < ApplicationController
         @rsvp.confirmed = false
       end
       if @rsvp.update(rsvp_params)
-        format.html { redirect_to events_path, notice: 'Rsvp was successfully updated.' }
+        format.html { redirect_to events_path }
         format.json { render :show, status: :ok, location: @rsvp }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class RsvpsController < ApplicationController
   def destroy
     @rsvp.destroy
     respond_to do |format|
-      format.html { redirect_to events_path, notice: 'Rsvp was successfully destroyed.' }
+      format.html { redirect_to events_path }
       format.json { head :no_content }
     end
   end
