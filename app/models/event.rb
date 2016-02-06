@@ -32,8 +32,8 @@ class Event < ActiveRecord::Base
     self.rsvps.where(confirmed: true).length
   end
 
-def self.search(query)
+  def self.search(query)
     where("category ILIKE ? OR name ILIKE ? OR description ILIKE ? AND status = ? ", "%#{query}%", "%#{query}%", "%#{query}%", true)
-end
+  end
 
 end

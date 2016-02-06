@@ -199,23 +199,14 @@
   <% end %>
 <% end %>
 </div>
-<!-- <<<<<<< HEAD -->
 </section>
 <br />
 <br />
-<section = "comments-section"
+<section>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Public Comments</h3>
      <div class="comments_body">
-<!-- ======= -->
-
-<!-- <div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Public Comments</h3>
-  </div>
-  <div class="panel-body"> -->
-<!-- >>>>>>> developer -->
     <div class="well">
     <% @event.comments.each do |comment| %>
       <% if comment.is_private == false %>
@@ -234,8 +225,10 @@
 <h2 class="add-comment">Add a comment:</h2>
 <%= render 'comments/form', locals: {is_private: false} %>
 <br>
-
 <% if Rsvp.find_by(event_id: @event.id, guest_id: current_user.id, confirmed: true) || @event.host.id == current_user.id  %>
+
+<br>
+
 <div class="panel panel-danger">
   <div class="panel-heading">
     <h3 class="panel-title">Private Comments</h3>
@@ -254,6 +247,7 @@
     </div>
   </div>
 </div>
+
 <div class="panel-footer">Private: Visible only to guests of this event</div>
 </div>
 <h2 class="add-comment">Add a private comment:</h2>
