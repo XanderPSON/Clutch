@@ -59,11 +59,12 @@ gem 'geocoder'
 # gem 'leaflet-rails'
 # gem 'leaflet-markercluster-rails'
 
+gem 'faker'
+gem 'ffaker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'faker'
-  gem 'ffaker'
   # gem 'pry-nav'
   # gem 'rspec-rails'
   # gem 'chromedriver-helper'
