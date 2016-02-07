@@ -29,11 +29,11 @@ class RsvpsController < ApplicationController
     respond_to do |format|
       if @rsvp.save
         if request.xhr?
-        format.html { render :makebutton, layout: false }
+          format.html { render :makebutton, layout: false }
           format.json { render :show, status: :created, location: @rsvp }
         end
-        format.html { redirect_to events_path }
-        format.json { render :show, status: :created, location: @rsvp }
+          format.html { redirect_to "/" }
+          format.json { render :show, status: :created, location: @rsvp }
       else
         format.html { render :new }
         format.json { render json: @rsvp.errors, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class RsvpsController < ApplicationController
         @rsvp.confirmed = false
       end
       if @rsvp.update(rsvp_params)
-        format.html { redirect_to events_path }
+        format.html { redirect_to "/" }
         format.json { render :show, status: :ok, location: @rsvp }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class RsvpsController < ApplicationController
   def destroy
     @rsvp.destroy
     respond_to do |format|
-      format.html { redirect_to events_path }
+      format.html { redirect_to "/" }
       format.json { head :no_content }
     end
   end
