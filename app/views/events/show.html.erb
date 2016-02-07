@@ -92,7 +92,7 @@
 </div><!-- /.blog-main -->
 <section class="host-attendees">
           <div>
-                <%= link_to image_tag(User.find(@event.host_id).avatar), user_path(User.find(@event.host_id)), class: "img-circle", width: "300", height: "300" %>
+                <%= link_to image_tag(User.find(@event.host_id).avatar, size: "100"), user_path(User.find(@event.host_id)), class: "img-circle", width: "300", height: "300" %>
                   <h4><%= @event.host.first_name + " " + @event.host.last_name %>
                   <i class="fa fa-star-o fa-2x"></i> : <%= Rating.where(ratee_id: @event.host.id).average(:rating).to_f.round(2) %></h4>
           </div>
@@ -101,7 +101,7 @@
               <h4>Pending Requests<span class="badge"><%= @event.rsvps.where(pending: true).length %></span>
               </h4>
               <% @event.rsvps.where(pending: true).each do |request| %>
-                <%= link_to image_tag(User.find(request.guest_id).avatar), user_path(User.find(request.guest_id)) %>
+                <%= link_to image_tag(User.find(request.guest_id).avatar, size: "100"), user_path(User.find(request.guest_id)) %>
                   <%= link_to "#{User.find(request.guest_id).first_name}" + " " + "#{User.find(request.guest_id).last_name}", User.find(request.guest_id) %><span class="label label-warning"><%= link_to 'Confirm', {controller: "rsvps", action: "update", id: request.id, rsvp: {guest_id: request.guest_id, event_id: request.event_id, pending: false, confirmed: true}}, method: :put %></span>
               <% end %>
             <% end %>
@@ -120,7 +120,7 @@
             <% @event.guests.each do |guest| %>
               <% if Rsvp.find_by(event_id: @event.id, guest_id: guest.id, confirmed: true) %>
                 <br />
-              <%= link_to image_tag(guest.avatar), user_path(guest.id) %>
+              <%= link_to image_tag(guest.avatar, size: "100"), user_path(guest.id) %>
                 <br />
               <%= guest.first_name + " " + guest.last_name %>
                 <br />
@@ -176,7 +176,7 @@
    <br />
     Host
     <br />
-    <%= link_to image_tag(@event.host.avatar), user_path(@event.host.id) %>
+    <%= link_to image_tag(@event.host.avatar, size: "100"), user_path(@event.host.id) %>
     <br />
    <%= @event.host.first_name + " " + @event.host.last_name %>
     <br />
@@ -186,7 +186,7 @@
   <% @event.guests.each do |guest| %>
     <% if Rsvp.find_by(event_id: @event.id, guest_id: guest.id, confirmed: true) %>
         <br />
-        <%= link_to image_tag(guest.avatar), user_path(guest.id) %>
+        <%= link_to image_tag(guest.avatar, size: "100"), user_path(guest.id) %>
         <br />
         <%= guest.first_name + " " + guest.last_name %>
         <br />
@@ -199,23 +199,14 @@
   <% end %>
 <% end %>
 </div>
-<!-- <<<<<<< HEAD -->
 </section>
 <br />
 <br />
-<section = "comments-section"
+<section>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Public Comments</h3>
      <div class="comments_body">
-<!-- ======= -->
-
-<!-- <div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Public Comments</h3>
-  </div>
-  <div class="panel-body"> -->
-<!-- >>>>>>> developer -->
     <div class="well">
     <% @event.comments.each do |comment| %>
       <% if comment.is_private == false %>
@@ -234,8 +225,10 @@
 <h2 class="add-comment">Add a comment:</h2>
 <%= render 'comments/form', locals: {is_private: false} %>
 <br>
-
 <% if Rsvp.find_by(event_id: @event.id, guest_id: current_user.id, confirmed: true) || @event.host.id == current_user.id  %>
+
+<br>
+
 <div class="panel panel-danger">
   <div class="panel-heading">
     <h3 class="panel-title">Private Comments</h3>
@@ -254,6 +247,7 @@
     </div>
   </div>
 </div>
+
 <div class="panel-footer">Private: Visible only to guests of this event</div>
 </div>
 <h2 class="add-comment">Add a private comment:</h2>
@@ -261,7 +255,7 @@
 <% end %>
 
 <% else %>
-<p>Please log in to see event details</p>
+<h3>Please login to see event details</h3>
 <% end %>
 </section>
 </section>

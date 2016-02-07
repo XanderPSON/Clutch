@@ -25,7 +25,7 @@
   </fieldset>
   <fieldset class="form-group">
     <%= f.label :category %><br>
-    <%= f.text_field :category, class: "form-control" %>
+    <%= f.select :category, ['Videogames', 'Boardgames', 'Basketball', 'Soccer', 'Tennis', 'Cycling', 'Hiking', 'Restaurant Exploring', 'Other'], class: "form-control" %>
   </fieldset>
   <fieldset class="form-group">
     <%= f.label :max_size %><br>

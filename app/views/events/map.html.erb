@@ -16,7 +16,17 @@
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.css' rel='stylesheet' />
 </head>
  <body>
-	<nav id='filters' class='filter-ui'></nav>
+
+  <nav class='menu-ui'>
+    <a href='#' class='active' data-filter='all'>Show All</a>
+    <a href='#' data-filter='videogames'>Videogames</a>
+    <a href='#' data-filter='boardgames'>Boardgames</a>
+    <a href='#' data-filter='sports'>Sports</a>
+    <a href='#' data-filter='hiking'>Hiking</a>
+    <a href='#' data-filter='food'>Restaurant Exploring</a>
+    <a href='#' data-filter='other'>Other</a>
+  </nav>
+
 	<div id='map' class='map'></div>
 	<div id='info' class='info'></div>
   <div id='sign-in-ajax' class='sign-in-ajax'></div>
