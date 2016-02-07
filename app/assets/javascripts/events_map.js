@@ -125,7 +125,10 @@ function addEventPopups(map) {
         feature = marker.feature,
         properties = marker.feature.properties,
         popupContent =      '<div><strong>' + properties.name + '</strong>' +
-                            '<br/>' + properties.description + '</div>'
+                            '<br/>' + properties.description +
+                            '<br/><br/><strong>' + properties.date_start + '</strong>: ' +
+                            properties.time_start + ' - ' + properties.time_end +
+                            '<br/><strong>Coming in Clutch: ' + properties.currently_attending + '/' + properties.max_size + '</div>'
                             // '<br/><strong>Category</strong> : ' + properties.category +
                             // '<br/><strong>Current / Max</strong> : ' + properties.currently_attending + ' / ' + properties.max_size +
                             // '<br/><strong>Host</strong> : ' + properties.host +

@@ -62,6 +62,8 @@ gem 'geocoder'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'faker'
+  gem 'ffaker'
   # gem 'pry-nav'
   # gem 'rspec-rails'
   # gem 'chromedriver-helper'
@@ -69,8 +71,6 @@ group :development, :test do
   # gem 'shoulda-matchers'
   # gem 'selenium-webdriver'
   # gem "capybara"
-  # gem 'ffaker'
-  # gem 'faker'
 end
 
 group :development do

@@ -1,7 +1,7 @@
 <div class="navbar-right">
 <ul class="nav navbar-nav">
   <% if user_signed_in? %>
-    <li><%= link_to image_tag(current_user.avatar), user_path(current_user.id), class: "grav" %></li>
+    <li><%= link_to image_tag(current_user.avatar, {size: "35"}), user_path(current_user.id), class: "avatar" %></li>
     <li><%= link_to "#{current_user.first_name}'s Profile", current_user, class: "user-profile" %></li>
     <li><%= link_to "Logout", destroy_user_session_path, :method => :delete, class: "logout" %></li>
   <% else %>
