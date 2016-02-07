@@ -41,10 +41,18 @@ $(document).on('page:change', function(){   // $(document).ready(function(){
     var filter = $(this).data('filter');
     $(this).addClass('active').siblings().removeClass('active');
     map.featureLayer.setFilter(function(f) {
-        // If the data-filter attribute is set to "all", return
-        // all (true). Otherwise, filter on markers that have
-        // a value set to true based on the filter name.
-        return (filter === 'all') ? true : f.properties.category === filter;
+      if (filter === 'all') {
+        return true;
+      }
+      else if (filter === 'food') {
+        return (f.properties.category === 'restaurant exploring')
+      }
+      else if (filter === 'sports') {
+        return (['soccer', 'basketball', 'tennis', 'cycling'].indexOf(f.properties.category) + 1)
+      }
+      else {
+        return (f.properties.category === filter);
+      }
     });
     return false;
   });
@@ -89,6 +97,8 @@ $(document).on('page:change', function(){   // $(document).ready(function(){
     })    
   })
 
+
+
 }); //document ready
 
 function getEvents(map) {
@@ -112,9 +122,10 @@ function getEvents(map) {
 function addEventPopups(map) {
   map.featureLayer.on('layeradd', function(e){
     var marker = e.layer,
+        feature = marker.feature,
         properties = marker.feature.properties,
-        popupContent =      '<div><strong>Event Name</strong> : ' + properties.name +
-                            '<br/><strong>Description</strong> : ' + properties.description + '</div>'
+        popupContent =      '<div><strong>' + properties.name + '</strong>' +
+                            '<br/>' + properties.description + '</div>'
                             // '<br/><strong>Category</strong> : ' + properties.category +
                             // '<br/><strong>Current / Max</strong> : ' + properties.currently_attending + ' / ' + properties.max_size +
                             // '<br/><strong>Host</strong> : ' + properties.host +

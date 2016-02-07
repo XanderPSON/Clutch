@@ -27,21 +27,55 @@ class GeojsonBuilder < ActiveRecord::Base
         category: event.category.downcase,
         "marker-color": set_color(event),
         "marker-symbol": set_symbol(event),
-        # "marker-color": ["#00CCFF", '#00CC66', '#FF3399', '#FFCC33', '#FFFF66'].sample,
-        #"marker-symbol": [ "bicycle", "pitch", "soccer", "america-football", "tennis", "basketball", "baseball", "golf", "swimming", "cricket", "skiing", "beer", "restaurant", "cafe", "shop", "fast-food", "bar", "cinema"].sample,
-        "marker-size": "medium",
+        "marker-size": "medium"
       }
     }
   end
 
   def self.set_color(event)
-    my_color = ""
-    event.category == "Games" ? my_color = "#00CC66" : my_color = "#FFFF66"
+    case event.category.downcase
+    when "videogames"
+      "#00CCFF"
+    when "boardgames"
+      "#a52a2a"
+    when "basketball"
+      "#FFCC33"
+    when "soccer"
+      "#000000"
+    when "tennis"
+      "#C6ED2C"
+    when "cycling"
+      "#FF3399"
+    when "hiking"
+      "#00CC66"
+    when "restaurant exploring"
+      "#cc00cc"
+    else
+      "#FFFF66"
+    end
   end
 
   def self.set_symbol(event)
-    my_symbol = ""
-    event.category == "Games" ? my_symbol = "shop" : my_symbol = "soccer"
+    case event.category.downcase
+    when "videogames"
+      "beer"
+    when "boardgames"
+      "library"
+    when "basketball"
+      "basketball"
+    when "soccer"
+      "soccer"
+    when "tennis"
+      "tennis"
+    when "cycling"
+      "bicycle"
+    when "hiking"
+      "pitch"
+    when "restaurant exploring"
+      "restaurant"
+    else
+      "triangle-stroked"
+    end
   end
 
 end
