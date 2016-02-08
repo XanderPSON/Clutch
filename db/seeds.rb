@@ -654,6 +654,7 @@ end
   count = 1
   current_event = Event.find(count)
   random_guest = current_event.guests.sample
+  next if random_guest == nil
       Rating.create!(
           event_id: count,
           rating: rand(1.0..5.0),
@@ -670,6 +671,8 @@ end
 200.times do
   count = 1
   current_event = Event.find(count)
+  random_guest = current_event.guests.sample
+  next if random_guest == nil
       Rating.create!(
           event_id: count,
           rating: rand(1.0..5.0),
