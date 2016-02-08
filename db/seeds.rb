@@ -421,7 +421,7 @@ User.create(
         last_name: "Hubert",
     )
 
-  	User.create!(
+    User.create!(
         address_line_1: "633 Folsom",
         address_line_2: "6th Floor",
         city: "San Francisco",
@@ -460,7 +460,7 @@ def fffaker_event
     my_restaurant = ['try this new restaurant!', 'eat dinner at this local favorite joint.', 'do a group brunch.', 'make friends while we break bread!']
     my_other = ['marathon the new season of House of Cards.', 'go on an ice cream binge!', 'come over and play beerpong!', 'hit the gym.', 'go surfing!', 'check out the new exhibit at the California Science Museum.']
 
-    my_first_phrase = ["Let's ", "Looking for awesome people to ", "Hey cool cats, let's ", "Anyone welcome to ", "Let's hangout and ", "Come and ", "Celebrating funemployment! Let's "]
+    my_first_phrase = ["Let's ", "Looking for awesome people to ", "Hey guys, let's ", "Anyone welcome to ", "Let's hangout and ", "Come and ", "Celebrating funemployment! Let's "]
     my_category = ["videogames", "boardgames", "basketball", "soccer", "tennis", "cycling", "hiking", "restaurant exploring", "other"].sample
     my_name = ""
 
@@ -502,7 +502,7 @@ end
         state: FFaker::AddressUS.state_abbr,
         zip: FFaker::AddressUS.zip_code,
         max_size: random_size,
-        time_start: Faker::Time.between(DateTime.now - 1, DateTime.now),
+        time_start: Faker::Time.between(DateTime.now, DateTime.now + 30),
         time_end: Faker::Time.forward(200),
         name: my_data[:name],
         description: FFaker::HipsterIpsum.sentence,
@@ -530,7 +530,7 @@ end
         state: FFaker::AddressUS.state_abbr,
         zip: FFaker::AddressUS.zip_code,
         max_size: random_size,
-        time_start: Faker::Time.between(DateTime.now - 1, DateTime.now),
+        time_start: Faker::Time.between(DateTime.now, DateTime.now + 30),
         time_end: Faker::Time.forward(200),
         name: my_data[:name],
         description: FFaker::HipsterIpsum.sentence,
