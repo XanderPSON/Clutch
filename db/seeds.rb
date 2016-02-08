@@ -502,7 +502,7 @@ end
         state: FFaker::AddressUS.state_abbr,
         zip: FFaker::AddressUS.zip_code,
         max_size: random_size,
-        time_start: Faker::Time.between(DateTime.now, DateTime.now + 30),
+        time_start: Faker::Time.between(DateTime.now - 1, DateTime.now + 30),
         time_end: Faker::Time.forward(200),
         name: my_data[:name],
         description: FFaker::HipsterIpsum.sentence,
@@ -530,7 +530,7 @@ end
         state: FFaker::AddressUS.state_abbr,
         zip: FFaker::AddressUS.zip_code,
         max_size: random_size,
-        time_start: Faker::Time.between(DateTime.now, DateTime.now + 30),
+        time_start: Faker::Time.between(DateTime.now - 1, DateTime.now + 30),
         time_end: Faker::Time.forward(200),
         name: my_data[:name],
         description: FFaker::HipsterIpsum.sentence,
@@ -654,7 +654,6 @@ end
   count = 1
   current_event = Event.find(count)
   random_guest = current_event.guests.sample
-  next if random_guest == nil
       Rating.create!(
           event_id: count,
           rating: rand(1.0..5.0),
@@ -671,8 +670,6 @@ end
 200.times do
   count = 1
   current_event = Event.find(count)
-  random_guest = current_event.guests.sample
-  next if random_guest == nil
       Rating.create!(
           event_id: count,
           rating: rand(1.0..5.0),
