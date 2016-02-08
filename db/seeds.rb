@@ -421,7 +421,7 @@ User.create(
         last_name: "Hubert",
     )
 
-  	User.create!(
+    User.create!(
         address_line_1: "633 Folsom",
         address_line_2: "6th Floor",
         city: "San Francisco",
@@ -502,7 +502,7 @@ end
         state: FFaker::AddressUS.state_abbr,
         zip: FFaker::AddressUS.zip_code,
         max_size: random_size,
-        time_start: Faker::Time.between(DateTime.now, DateTime.now + 30),
+        time_start: Faker::Time.between(DateTime.now - 1, DateTime.now + 30),
         time_end: Faker::Time.forward(200),
         name: my_data[:name],
         description: FFaker::HipsterIpsum.sentence,
@@ -530,7 +530,7 @@ end
         state: FFaker::AddressUS.state_abbr,
         zip: FFaker::AddressUS.zip_code,
         max_size: random_size,
-        time_start: Faker::Time.between(DateTime.now, DateTime.now + 30),
+        time_start: Faker::Time.between(DateTime.now - 1, DateTime.now + 30),
         time_end: Faker::Time.forward(200),
         name: my_data[:name],
         description: FFaker::HipsterIpsum.sentence,
